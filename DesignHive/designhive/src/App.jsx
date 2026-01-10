@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import BackgroundLayout from "./components/BackgroundLayout";
@@ -14,11 +14,24 @@ import SixthPage from "./components/SixthPage";
 import SeventhPage from "./components/SeventhPage";
 import EighthPage from "./components/EighthPage";
 import AnalysisPage from "./components/AnalysisPage";
+import TestingIcons from "./components/screens/TestingIcons";
+import ResultsPage from "./components/ResultsPage";
+import PostResult from "./components/PostResult";
 
 const App = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [selectionMode, setSelectionMode] = useState(null);
+
+
   const [reactions, setReactions] = useState({});
+
+  // What logic should I use for this now...idonthavetime
+  const [reactionWeight, setRW] = useState(0);
+
+  const ICON_KEYS = ["idea", "cloud", "bolt", "puzzle", "paint", "minimal"];
+  const [resultIcon] = useState(() => {
+    return ICON_KEYS[Math.floor(Math.random() * ICON_KEYS.length)];
+  });
 
   const handleNext = () => {
     if (currentStep < screens.length - 1) {
@@ -95,7 +108,11 @@ const App = () => {
       selectedReaction={reactions.eighth}
     />,
 
-    <AnalysisPage key="analysis" reactions={reactions} />,
+    <AnalysisPage key="analysis" reactions={reactions} onComplete={handleNext} />,
+
+    <ResultsPage key="testing" iconKey={resultIcon} />,
+
+    <PostResult key="postResult" iconKey={resultIcon} />
   ];
 
   return (
@@ -106,19 +123,6 @@ const App = () => {
       {/* SCREEN TRANSITION AREA */}
       <div className="flex-1 w-full flex items-center justify-center relative overflow-hidden">
         <AnimatePresence mode="wait">
-          {/* <motion.div
-            key={currentStep}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.35, ease: "easeInOut", delay: 1 }}
-            className="w-full h-full flex items-center justify-center"
-          >
-            {screens[currentStep]}
-          </motion.div> */}
-          
-          {/* It happens to be the case that motion div applies delay to both entry and exit */}
-          
           <motion.div
             key={currentStep}
             initial={{ opacity: 0 }}
@@ -131,7 +135,7 @@ const App = () => {
                 ease: "easeInOut",
               },
             }}
-            transition={{ duration: 0.35, ease: "easeInOut"}}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
             className="w-full h-full flex items-center justify-center"
           >
             {screens[currentStep]}
@@ -152,4 +156,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App

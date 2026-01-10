@@ -1,10 +1,9 @@
-import React from "react";
 import { motion } from "framer-motion";
 
 const EighthPage = ({ screenKey,
-  onSelect,
-  selectedReaction,
-  previousReaction, }) => {
+    onSelect,
+    selectedReaction,
+    previousReaction, }) => {
     const scenarioCards = [
         { id: 1, text: "FIX A TYPO OR REDESIGN?" },
         { id: 2, text: "WHEN PIXELS MISALIGN...?" },
@@ -18,10 +17,8 @@ const EighthPage = ({ screenKey,
     ];
 
     return (
-        // Reduced main gap from gap-8 to gap-6 to tighten the layout
         <div className="w-full h-full flex flex-col items-center justify-center gap-6 p-8 animate-in fade-in zoom-in duration-700 relative overflow-hidden">
 
-            {/* Hexagon Pattern Background Overlay */}
             <div
                 className="absolute inset-0 opacity-10 pointer-events-none"
                 style={{
@@ -31,9 +28,6 @@ const EighthPage = ({ screenKey,
             />
 
             <h2 class="text-[rgb(244,216,184)] text-[40px]">Bonus Round!</h2>
-
-            {/* Top Scenario Cards - Made Smaller */}
-            {/* Reduced max-width (max-w-5xl -> max-w-4xl) and margin-bottom (mb-8 -> mb-6) */}
 
             <div className="flex justify-center gap-4 w-full max-w-4xl mb-6">
                 {scenarioCards.map((card) => (
@@ -49,8 +43,6 @@ const EighthPage = ({ screenKey,
                 ))}
             </div>
 
-
-            {/* Select Reaction Section */}
             <div className="flex flex-col items-center gap-6 w-full max-w-2xl">
                 <p
                     className="uppercase tracking-[0.2em] text-sm"
@@ -67,17 +59,7 @@ const EighthPage = ({ screenKey,
                             <button
                                 key={reaction.id}
                                 onClick={() => onSelect(screenKey, reaction.id)}
-                                className={`
-                  px-10 py-5
-                  backdrop-blur-sm
-                  border
-                  rounded-full
-                  transition-all
-                  uppercase
-                  tracking-wider
-                  flex items-center gap-2
-                  ${isSelected ? "scale-105" : ""}
-                `}
+                                className={`px-10 py-5 backdrop-blur-sm border rounded-full transition-all uppercase tracking-wider flex items-center gap-2 ${isSelected ? "scale-105" : ""}`}
                                 style={{
                                     backgroundColor: "rgba(90, 38, 80, 0.8)",
                                     borderColor: isSelected
@@ -95,16 +77,13 @@ const EighthPage = ({ screenKey,
                     })}
                 </div>
             </div>
-
-            {/* Complete Analysis Button - Lifted, Pill-shaped, Smaller */}
-            {/* Reduced margin-top (mt-12 -> mt-6) to lift it up */}
             <div className="mt-6">
                 <button
-  className="px-8 py-4 rounded-xl uppercase tracking-wider text-sm transition-transform hover:scale-105"
-  style={{ backgroundColor: "rgb(233,168,106)", color: "rgb(74,31,62)" }}
->
-  Complete Analysis
-</button>
+                    className="px-8 py-4 rounded-xl uppercase tracking-wider text-sm transition-transform hover:scale-105"
+                    style={{ backgroundColor: "rgb(233,168,106)", color: "rgb(74,31,62)" }}
+                >
+                    Complete Analysis
+                </button>
 
 
             </div>

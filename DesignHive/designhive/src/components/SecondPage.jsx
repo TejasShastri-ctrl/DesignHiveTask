@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const SecondPage = ({ onNext }) => {
     const [progress, setProgress] = useState(0);
 
     useEffect(() => {
-        const duration = 2000; // 2 seconds
+        const duration = 2000;
         const intervalTime = 20;
         const increment = (intervalTime / duration) * 100;
 

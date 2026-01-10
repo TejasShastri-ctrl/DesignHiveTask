@@ -1,4 +1,3 @@
-import React from 'react';
 
 const ThirdPage = ({ onNext, selectionMode, onSelectionModeChange }) => {
     const handleModeSelection = (selectedMode) => {
@@ -8,9 +7,8 @@ const ThirdPage = ({ onNext, selectionMode, onSelectionModeChange }) => {
     return (
         <div className="w-full h-full flex flex-col items-center justify-center p-8 animate-in fade-in zoom-in duration-700">
 
-            {/* Mock Camera Viewport */}
+            {/* mock camera */}
             <div className="relative w-full max-w-4xl aspect-video bg-[#3d243a] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                {/* Hexagonal Pattern Overlay */}
                 <div className="absolute inset-0 opacity-20 pointer-events-none"
                     style={{
                         backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M30 0l25.98 15v30L30 60 4.02 45V15z\' fill-rule=\'evenodd\' stroke=\'%23ffffff\' stroke-width=\'1\' fill=\'none\'/%3E%3C/svg%3E")',
@@ -18,13 +16,11 @@ const ThirdPage = ({ onNext, selectionMode, onSelectionModeChange }) => {
                     }}
                 />
 
-                {/* Corner Brackets */}
                 <div className="absolute top-8 left-8 w-8 h-8 border-t-2 border-l-2 border-orange-200/50" />
                 <div className="absolute top-8 right-8 w-8 h-8 border-t-2 border-r-2 border-orange-200/50" />
                 <div className="absolute bottom-8 left-8 w-8 h-8 border-b-2 border-l-2 border-orange-200/50" />
                 <div className="absolute bottom-8 right-8 w-8 h-8 border-b-2 border-r-2 border-orange-200/50" />
 
-                {/* Center User Icon */}
                 <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-32 h-32 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center">
                         <svg viewBox="0 0 24 24" className="w-16 h-16 fill-white opacity-40">
@@ -33,14 +29,12 @@ const ThirdPage = ({ onNext, selectionMode, onSelectionModeChange }) => {
                     </div>
                 </div>
 
-                {/* Status Pill */}
                 <div className="absolute bottom-8 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
                     <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-white/90">READY</span>
                 </div>
             </div>
 
-            {/* Interaction Area */}
             <div className="mt-12 flex flex-col items-center gap-8 w-full max-w-sm">
                 {!selectionMode ? (
                     <>
@@ -81,7 +75,6 @@ const ThirdPage = ({ onNext, selectionMode, onSelectionModeChange }) => {
                 )}
             </div>
 
-            {/* Top Right Label */}
             <div className="fixed top-8 right-12 flex items-center gap-4 text-orange-100/60 font-medium tracking-widest text-sm">
                 <span className="opacity-80">3 / 12</span>
                 <div className="flex items-center gap-2">

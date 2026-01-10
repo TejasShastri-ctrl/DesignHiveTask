@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Welcome = () => {
     return (
         <div className="w-full max-w-4xl flex flex-col items-center justify-center gap-8 animate-in fade-in zoom-in duration-700">

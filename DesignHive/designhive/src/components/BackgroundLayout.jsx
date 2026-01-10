@@ -1,8 +1,6 @@
-import React from 'react';
 import hexback from '../assets/hexback.png';
 
 const BackgroundLayout = ({ children }) => {
-  // Define the dark yellow theme color
   const THEME_YELLOW = "#c4a000";
 
   const ornaments = [
@@ -16,7 +14,6 @@ const BackgroundLayout = ({ children }) => {
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-[#401F3E]">
 
-      {/* 1. Base Layer - Radial Gradient */}
       <div
         className="absolute inset-0"
         style={{
@@ -25,15 +22,11 @@ const BackgroundLayout = ({ children }) => {
         }}
       />
 
-      {/* 2. Single Layer PNG Hexagonal Mesh - RECOLORED VIA MASKING */}
+      {/* Single Layer PNG Hexagonal Mesh - RECOLORED VIA MASKING */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.08]" 
+        className="absolute inset-0 pointer-events-none opacity-[0.08]"
         style={{
-          // Step 1: Set the solid color of the layer
           backgroundColor: THEME_YELLOW,
-
-          // Step 2: Use the image as a mask to cut out the shape
-          // Standard syntax
           maskImage: `url(${hexback})`,
           maskRepeat: 'no-repeat',
           maskPosition: 'center',
@@ -44,15 +37,13 @@ const BackgroundLayout = ({ children }) => {
           WebkitMaskRepeat: 'no-repeat',
           WebkitMaskPosition: 'center',
           WebkitMaskSize: 'cover',
-          
+
           zIndex: 1
         }}
       />
 
-      {/* 3. Subtle Overlay for depth */}
       <div className="absolute inset-0 bg-black/20 backdrop-blur-[0.5px] z-[2]" />
 
-      {/* 4. Floating Ornaments */}
       <div className="absolute inset-0 pointer-events-none z-[3]">
         {ornaments.map((item, index) => (
           <div
@@ -77,7 +68,6 @@ const BackgroundLayout = ({ children }) => {
         ))}
       </div>
 
-      {/* 5. Main Content Layer */}
       <main className="relative z-50 flex flex-col items-center justify-center min-h-screen p-6">
         {children}
       </main>

@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-const AnalysisPage = ({ reactions = {} }) => {
+const AnalysisPage = ({ reactions = {}, onComplete }) => {
     const [progress, setProgress] = useState(0);
     const dataPointsCount = Object.keys(reactions).length;
 
-    // Defined theme colors for consistency
-    const THEME_YELLOW = "#c4a000"; // Dark Yellow/Mustard
-    const THEME_GREY = "#4b5563";   // Muted Grey
+    const THEME_YELLOW = "#c4a000";
+    const THEME_GREY = "#4b5563";
 
     const checkpoints = [
         { id: "initialized", label: "INITIALIZED" },
@@ -34,10 +33,17 @@ const AnalysisPage = ({ reactions = {} }) => {
         return () => clearInterval(timer);
     }, []);
 
+    useEffect(() => {
+        if (progress >= 100 && onComplete) {
+            const transitionTimeout = setTimeout(() => {
+                onComplete();
+            }, 800);
+            return () => clearTimeout(transitionTimeout);
+        }
+    }, [progress, onComplete]);
+
     return (
         <div className="w-full min-h-screen flex flex-col items-center justify-end relative overflow-hidden bg-transparent p-8 pb-10">
-
-            {/* Pulsating Concentric Circles - Updated to Yellow/Grey Palette */}
             <div className="absolute mb-70 inset-0 flex items-center justify-center pointer-events-none">
                 {[1, 2, 3].map((i) => (
                     <motion.div
@@ -55,7 +61,6 @@ const AnalysisPage = ({ reactions = {} }) => {
                         style={{
                             width: `${i * 100}px`,
                             height: `${i * 100}px`,
-                            // Blending circles between blue-steel, earth-brown, and the new yellow
                             borderColor: i === 2 ? "#4A6FA5" : i === 3 ? "#A06B4E" : `${THEME_YELLOW}66`,
                             boxShadow: `0 0 30px ${THEME_YELLOW}1A`
                         }}
@@ -63,16 +68,15 @@ const AnalysisPage = ({ reactions = {} }) => {
                 ))}
             </div>
 
-            {/* Bottom-aligned UI Stack */}
             <div className="z-10 w-full max-w-[600px] flex flex-col items-center gap-8 mb-12">
 
-                
+
                 {/* Status Texts */}
                 <div className="text-center space-y-6">
                     <h2 className="text-[#F4D8B8] mb-2 uppercase tracking-tight text-4xl text-[40px]">Analyzing</h2>
 
                     <div className="flex flex-col items-center gap-2 space-y-3">
-                        <div className={`px-4 py-1.5 rounded-full mt-8 border border-yellow-400 border-[1px] bg-[#3d243a]/60 backdrop-blur-sm`}>
+                        <div className={`px-4 py-1.5 rounded-full mt-8 border border-yellow-400 border-[1px] bg-[#3d243a]/60 backdrop-blur-sm animate-pulse duration-500`}>
                             <span className="font-bold tracking-[0.2em] text-[10px] uppercase text-white opacity-60">
                                 PROCESSING DNA
                             </span>
@@ -85,11 +89,10 @@ const AnalysisPage = ({ reactions = {} }) => {
 
                 {/* Progress Bar and Checkpoints */}
                 <div className="w-full px-8">
-                    {/* Progress Bar with Yellow-to-Grey Gradient */}
                     <div className="relative h-2.5 w-full bg-[#3d243a]/80 rounded-full overflow-hidden border border-white/5">
                         <motion.div
                             className="absolute top-0 left-0 h-full"
-                            style={{ 
+                            style={{
                                 width: `${progress}%`,
                                 background: `linear-gradient(to right, ${THEME_YELLOW}, ${THEME_GREY})`
                             }}
@@ -104,13 +107,13 @@ const AnalysisPage = ({ reactions = {} }) => {
                                 <div key={cp.id} className="flex flex-col items-center gap-2">
                                     <div
                                         className="w-2 h-2 rounded-full transition-all duration-500"
-                                        style={{ 
+                                        style={{
                                             backgroundColor: isReached ? THEME_YELLOW : "rgba(255,255,255,0.1)",
                                             boxShadow: isReached ? `0 0 10px ${THEME_YELLOW}99` : "none",
                                             transform: isReached ? "scale(1.1)" : "scale(1)"
                                         }}
                                     />
-                                    <span 
+                                    <span
                                         className="text-[8px] font-black tracking-[0.15em] uppercase transition-colors duration-300"
                                         style={{ color: isReached ? THEME_YELLOW : "rgba(255,255,255,0.2)" }}
                                     >

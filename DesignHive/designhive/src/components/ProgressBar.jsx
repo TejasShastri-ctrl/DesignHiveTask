@@ -1,11 +1,10 @@
-import React from "react";
 
 const ProgressBar = ({ currentStep, totalSteps = 12, onNext, onPrev }) => {
   const steps = Array.from({ length: totalSteps });
 
   return (
     <div className="flex items-center gap-4 w-full justify-center">
-      {/* PREVIOUS */}
+      {/* prev */}
       <button
         onClick={onPrev}
         disabled={currentStep === 0}
@@ -16,7 +15,7 @@ const ProgressBar = ({ currentStep, totalSteps = 12, onNext, onPrev }) => {
         </svg>
       </button>
 
-      {/* PILL */}
+      {/* actual */}
       <div className="flex items-center gap-3 bg-[#5A2650]/80 backdrop-blur-md border-2 border-[#E9A86A]/30 rounded-full px-6 py-3 shadow-xl">
         {steps.map((_, index) => {
           const isActive = index === currentStep;
@@ -33,7 +32,7 @@ const ProgressBar = ({ currentStep, totalSteps = 12, onNext, onPrev }) => {
                   <div className="absolute inset-0 -m-2 bg-[#E9A86A] rounded-full blur-md opacity-40 scale-150" />
                 )}
 
-                {/* DOT */}
+                {/* THE DOTS */}
                 <div
                   className={`
                     relative w-full h-full rounded-full transition-all duration-300
@@ -53,7 +52,6 @@ const ProgressBar = ({ currentStep, totalSteps = 12, onNext, onPrev }) => {
                   )}
                 </div>
 
-                {/* CONNECTOR */}
                 {!isLast && (
                   <div
                     className={`
@@ -64,7 +62,6 @@ const ProgressBar = ({ currentStep, totalSteps = 12, onNext, onPrev }) => {
                 )}
               </button>
 
-              {/* ACTIVE LABEL */}
               {isActive && (
                 <span className="text-[#E9A86A] text-[10px] uppercase tracking-wider">
                   {currentStep + 1}/{totalSteps}
@@ -75,7 +72,6 @@ const ProgressBar = ({ currentStep, totalSteps = 12, onNext, onPrev }) => {
         })}
       </div>
 
-      {/* NEXT */}
       <button
         onClick={onNext}
         disabled={currentStep === totalSteps - 1}
