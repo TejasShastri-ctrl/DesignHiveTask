@@ -1,70 +1,87 @@
-import React from 'react';
+import React from "react";
 
 const ProgressBar = ({ currentStep, totalSteps = 12, onNext, onPrev }) => {
-  const dots = Array.from({ length: totalSteps });
+  const steps = Array.from({ length: totalSteps });
 
   return (
-    <div className="flex items-center gap-4 w-full max-w-[30%] px-4">
-      {/* Previous Button */}
+    <div className="flex items-center gap-4 w-full justify-center">
+      {/* PREVIOUS */}
       <button
         onClick={onPrev}
         disabled={currentStep === 0}
-        className="group relative flex items-center justify-center w-8 h-8 rounded-full border border-yellow-400/20 bg-white/5 hover:bg-white/10 disabled:opacity-10 transition-all duration-300 flex-shrink-0"
+        className="group relative flex items-center justify-center w-8 h-8 rounded-full border border-[#E9A86A]/30 bg-[#4A1F3E]/40 hover:bg-[#5A2650]/70 disabled:opacity-20 transition-all"
       >
-        <svg viewBox="0 0 24 24" className="w-3 h-3 stroke-yellow-100/70 group-hover:stroke-yellow-100" fill="none" strokeWidth="3">
+        <svg viewBox="0 0 24 24" className="w-3 h-3 stroke-[#E9A86A]" fill="none" strokeWidth="3">
           <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
 
-      {/* Main Pill Container - Smaller height and yellow border */}
-      <div className="relative flex-1 h-15 bg-[#531b3cff]/80 backdrop-blur-2xl border border-yellow-400/50 rounded-full px-6 flex items-center justify-between">
-
-        {/* The connecting horizontal line - Base Layer */}
-        <div className="absolute left-6 right-6 h-[1px] bg-white/5 top-1/2 -translate-y-1/2 z-0">
-          {/* Highlighted segment for completed progress */}
-          <div
-            className="h-full bg-yellow-400/60 transition-all duration-500 shadow-[0_0_10px_rgba(250,204,21,0.4)]"
-            style={{ width: `${(currentStep / (totalSteps - 1)) * 100}%` }}
-          />
-        </div>
-
-        {dots.map((_, index) => {
+      {/* PILL */}
+      <div className="flex items-center gap-3 bg-[#5A2650]/80 backdrop-blur-md border-2 border-[#E9A86A]/30 rounded-full px-6 py-3 shadow-xl">
+        {steps.map((_, index) => {
           const isActive = index === currentStep;
           const isCompleted = index < currentStep;
+          const isLast = index === totalSteps - 1;
 
           return (
-            <div key={index} className="relative z-10 flex flex-col items-center">
-              {/* The Dot */}
-              <div
-                className={`transition-all duration-500 rounded-full
-                  ${isActive
-                    ? 'w-2 h-2 bg-yellow-400 shadow-[0_0_12px_rgba(250,204,21,0.6)] border border-white/40'
-                    : isCompleted
-                      ? 'w-1.5 h-1.5 bg-yellow-400/80 shadow-[0_0_6px_rgba(250,204,21,0.3)]'
-                      : 'w-1.5 h-1.5 bg-white/10'}
-                `}
-              />
+            <div key={index} className="flex flex-col items-center gap-1 relative">
+              <button className={`relative transition-all duration-300 
+                ${isActive ? "w-3 h-3" : "w-2 h-2"}
+              `}>
+                {/* ACTIVE GLOW */}
+                {isActive && (
+                  <div className="absolute inset-0 -m-2 bg-[#E9A86A] rounded-full blur-md opacity-40 scale-150" />
+                )}
 
-              {/* Step Counter Text */}
-              <div
-                className={`absolute top-4 whitespace-nowrap text-[8px] font-black tracking-widest transition-all duration-500
-                  ${isActive ? 'opacity-100 translate-y-0 text-yellow-100' : 'opacity-0 -translate-y-1'}
-                `}
-              >
-                {currentStep + 1}/{totalSteps}
-              </div>
+                {/* DOT */}
+                <div
+                  className={`
+                    relative w-full h-full rounded-full transition-all duration-300
+                    ${
+                      isActive
+                        ? "bg-[#E9A86A] border-2 border-[#F4D8B8] shadow-lg shadow-[#E9A86A]/50"
+                        : isCompleted
+                        ? "bg-[#E9A86A] border-2 border-[#E9A86A]"
+                        : "bg-[#4A1F3E] border border-[#6B2D5C]/50 hover:border-[#E9A86A]/60 hover:bg-[#5A2650]"
+                    }
+                  `}
+                >
+                  {isCompleted && !isActive && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-1 h-1 bg-[#4A1F3E] rounded-full" />
+                    </div>
+                  )}
+                </div>
+
+                {/* CONNECTOR */}
+                {!isLast && (
+                  <div
+                    className={`
+                      absolute left-full top-1/2 -translate-y-1/2 h-0.5 w-3 transition-all
+                      ${isCompleted ? "bg-[#E9A86A]" : "bg-[#6B2D5C]/30"}
+                    `}
+                  />
+                )}
+              </button>
+
+              {/* ACTIVE LABEL */}
+              {isActive && (
+                <span className="text-[#E9A86A] text-[10px] uppercase tracking-wider">
+                  {currentStep + 1}/{totalSteps}
+                </span>
+              )}
             </div>
           );
         })}
       </div>
 
-      {/* Next Button */}
+      {/* NEXT */}
       <button
         onClick={onNext}
         disabled={currentStep === totalSteps - 1}
-        className="group relative flex items-center justify-center w-8 h-8 rounded-full border border-yellow-400/20 bg-white/5 hover:bg-white/10 disabled:opacity-10 transition-all duration-300 flex-shrink-0"
+        className="group relative flex items-center justify-center w-8 h-8 rounded-full border border-[#E9A86A]/30 bg-[#4A1F3E]/40 hover:bg-[#5A2650]/70 disabled:opacity-20 transition-all"
       >
-        <svg viewBox="0 0 24 24" className="w-3 h-3 stroke-yellow-100/70 group-hover:stroke-yellow-100" fill="none" strokeWidth="3">
+        <svg viewBox="0 0 24 24" className="w-3 h-3 stroke-[#E9A86A]" fill="none" strokeWidth="3">
           <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>

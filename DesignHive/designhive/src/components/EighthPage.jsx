@@ -9,8 +9,8 @@ const EighthPage = ({ onSelect, selectedReaction }) => {
     ];
 
     const reactions = [
-        { id: "thoughtful", label: "THOUGHTFUL", icon: "🤔" },
         { id: "amused", label: "AMUSED", icon: "😅" },
+        { id: "thoughtful", label: "THOUGHTFUL", icon: "🤔" },
         { id: "guilty", label: "GUILTY", icon: "😬" },
     ];
 
@@ -27,32 +27,34 @@ const EighthPage = ({ onSelect, selectedReaction }) => {
                 }}
             />
 
-            <h1 className="text-6xl font-black text-[#ead3c0] text-center uppercase tracking-tight drop-shadow-2xl mb-2">
-                Bonus Round!
-            </h1>
+            <h2 class="text-[rgb(244,216,184)] text-[40px]">Bonus Round!</h2>
 
             {/* Top Scenario Cards - Made Smaller */}
             {/* Reduced max-width (max-w-5xl -> max-w-4xl) and margin-bottom (mb-8 -> mb-6) */}
+
             <div className="flex justify-center gap-4 w-full max-w-4xl mb-6">
                 {scenarioCards.map((card) => (
-                    <div
+                    <button
                         key={card.id}
-                        // Reduced padding (p-8 -> p-6) and height (h-48 -> h-32)
-                        className="flex-1 bg-[#3d243a]/60 backdrop-blur-md border border-orange-200/20 rounded-2xl p-6 flex items-center justify-center text-center h-32"
+                        type="button"
+                        className="bg-[#5A2650]/60 backdrop-blur-sm border border-[#E9A86A]/30 rounded-xl p-8 text-center cursor-pointer flex items-center justify-center min-h-[120px] hover:bg-[#5A2650]/80 hover:border-[#E9A86A]/60 hover:scale-105"
                     >
-                        {/* Reduced text size (text-lg -> text-sm) */}
-                        <span className="text-orange-100 font-black tracking-widest text-sm uppercase leading-tight">
+                        <span className="text-[#F4D8B8] uppercase tracking-wide">
                             {card.text}
                         </span>
-                    </div>
+                    </button>
                 ))}
             </div>
 
+
             {/* Select Reaction Section */}
             <div className="flex flex-col items-center gap-6 w-full max-w-2xl">
-                <h2 className="text-[10px] font-bold text-orange-200/40 uppercase tracking-[0.5em]">
+                <p
+                    className="uppercase tracking-[0.2em] text-sm"
+                    style={{ color: "rgb(212, 181, 200)", opacity: 0.7 }}
+                >
                     Select Reaction
-                </h2>
+                </p>
 
                 <div className="flex justify-center gap-8">
                     {reactions.map((reaction) => {
@@ -61,37 +63,28 @@ const EighthPage = ({ onSelect, selectedReaction }) => {
                         return (
                             <button
                                 key={reaction.id}
-                                onClick={() => onSelect && onSelect("eighth", reaction.id)}
+                                onClick={() => onSelect(screenKey, reaction.id)}
                                 className={`
-    group flex items-center gap-3 px-6 py-4 rounded-full border-2
-    transition-all duration-300 ease-out
-    ${isSelected
-                                        ? "bg-orange-300 border-orange-300 scale-105 shadow-[0_0_28px_rgba(253,186,116,0.35)]"
-                                        : `bg-[#3d243a]/35 backdrop-blur-sm border-orange-200/15
-           hover:bg-[#3d243a]/55
-           hover:border-orange-200/40
-           hover:shadow-[0_0_22px_rgba(253,186,116,0.25)]
-           hover:scale-105`
-                                    }
-  `}
+                  px-10 py-5
+                  backdrop-blur-sm
+                  border
+                  rounded-full
+                  transition-all
+                  uppercase
+                  tracking-wider
+                  flex items-center gap-2
+                  ${isSelected ? "scale-105" : ""}
+                `}
+                                style={{
+                                    backgroundColor: "rgba(90, 38, 80, 0.8)",
+                                    borderColor: isSelected
+                                        ? "rgba(233, 168, 106, 0.6)"
+                                        : "rgba(233, 168, 106, 0.3)",
+                                    color: "rgb(255, 255, 255)",
+                                }}
                             >
-                                {/* Emoji — always colored */}
-                                <div
-                                    className={`
-      text-2xl transition-transform duration-300
-      group-hover:scale-110
-    `}
-                                >
-                                    {reaction.icon}
-                                </div>
-
-                                <span
-                                    className={`
-      font-black tracking-[0.18em] text-[10px]
-      transition-colors duration-300
-      ${isSelected ? "text-[#3d243a]" : "text-white/85"}
-    `}
-                                >
+                                <span className="text-2xl">{reaction.icon}</span>
+                                <span className="text-sm font-normal">
                                     {reaction.label}
                                 </span>
                             </button>

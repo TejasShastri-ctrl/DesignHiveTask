@@ -34,9 +34,12 @@ const FourthPage = ({ screenKey, onSelect, selectedReaction }) => {
 
       {/* Reactions */}
       <div className="flex flex-col items-center gap-10">
-        <h2 className="text-xl font-bold text-orange-100/60 uppercase tracking-[0.5em]">
+        <p
+    className="uppercase tracking-[0.2em] text-sm"
+    style={{ color: "rgb(212, 181, 200)", opacity: 0.7 }}
+  >
           Select Reaction
-        </h2>
+        </p>
 
         <div className="flex flex-wrap justify-center gap-10">
           {reactions.map((reaction) => {
@@ -45,30 +48,36 @@ const FourthPage = ({ screenKey, onSelect, selectedReaction }) => {
 
             return (
               <button
-                key={reaction.id}
-                onClick={() => onSelect(screenKey, reaction.id)}
-                className={`
-                  group flex items-center gap-6 px-12 py-8 rounded-[2rem] border-2 transition-all duration-500
-                  ${
-                    isSelected
-                      ? "bg-orange-300 border-orange-300 scale-110 shadow-[0_0_40px_rgba(253,186,116,0.4)]"
-                      : "bg-[#3d243a]/80 backdrop-blur-md border-orange-200/20 hover:border-orange-200/60 hover:bg-[#4a2d46] hover:scale-110 hover:shadow-2xl"
-                  }
-                `}
-              >
-                <span className="text-5xl transition-transform duration-500 group-hover:rotate-12">
-                  {reaction.icon}
-                </span>
+  key={reaction.id}
+  onClick={() => onSelect(screenKey, reaction.id)}
+  className={`
+    px-8 py-4
+    backdrop-blur-sm
+    border
+    rounded-full
+    transition-all
+    uppercase
+    tracking-wider
+    flex items-center gap-2
+    ${isSelected ? "scale-105" : ""}
+  `}
+  style={{
+    backgroundColor: "rgba(90, 38, 80, 0.8)",
+    borderColor: isSelected
+      ? "rgba(233, 168, 106, 0.6)"
+      : "rgba(233, 168, 106, 0.3)",
+    color: "rgb(255, 255, 255)",
+  }}
+>
+  <span className="text-2xl">
+    {reaction.icon}
+  </span>
 
-                <span
-                  className={`
-                    font-black tracking-[0.2em] text-lg
-                    ${isSelected ? "text-[#3d243a]" : "text-orange-100"}
-                  `}
-                >
-                  {reaction.label}
-                </span>
-              </button>
+  <span className="text-sm font-normal">
+    {reaction.label}
+  </span>
+</button>
+
             );
           })}
         </div>

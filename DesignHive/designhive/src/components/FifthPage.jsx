@@ -1,106 +1,122 @@
 import React from "react";
+import { motion } from "framer-motion";
 
-const FifthPage = ({ screenKey, onSelect, selectedReaction, previousReaction }) => {
-    const reactions = [
-        { id: "smile", label: "SMILE", icon: "😊" },
-        { id: "eyeball", label: "EYE ROLL", icon: "🙄" },
-        { id: "confused", label: "CONFUSED", icon: "😕" },
-    ];
+const FifthPage = ({
+  screenKey,
+  onSelect,
+  selectedReaction,
+  previousReaction,
+}) => {
+  const reactions = [
+      { id: "confused", label: "CONFUSED", icon: "😕" },
+    { id: "smile", label: "SMILE", icon: "😊" },
+    { id: "eyeball", label: "EYE ROLL", icon: "🙄" },
+  ];
 
-    const reactionEmojis = {
-        amused: "😆",
-        frustrated: "😤",
-        neutral: "😐",
-        smile: "😊",
-        eyeball: "🙄",
-        confused: "😕",
-    };
+  const reactionEmojis = {
+    amused: "😆",
+    frustrated: "😤",
+    neutral: "😐",
+    smile: "😊",
+    eyeball: "🙄",
+    confused: "😕",
+  };
 
-    const reactionLabels = {
-        amused: "Amused",
-        frustrated: "Frustrated",
-        neutral: "Neutral",
-        smile: "Smile",
-        eyeball: "Eye Roll",
-        confused: "Confused",
-    };
+  const reactionLabels = {
+    amused: "Amused",
+    frustrated: "Frustrated",
+    neutral: "Neutral",
+    smile: "Smile",
+    eyeball: "Eye Roll",
+    confused: "Confused",
+  };
 
-    return (
-        <div className="w-full h-full flex flex-col items-center justify-center gap-12 p-8 animate-in fade-in zoom-in duration-700">
+  return (
+    <div className="w-full h-full flex flex-col items-center p-8 animate-in fade-in zoom-in duration-700">
+      
+      {/* ================= HEADER ================= */}
+      <motion.h1
+        animate={{
+          scale: [1, 1.06, 1],
+          color: ["#60a5fa", "#facc15", "#60a5fa"],
+        }}
+        transition={{
+          duration: 1.2,
+          ease: "easeInOut",
+          repeat: Infinity,
+        }}
+        className="
+          mt-40
+          text-[105px]
+          font-medium
+          uppercase
+          tracking-normal
+          drop-shadow-2xl
+          will-change-transform
+        "
+      >
+        Make it pop!
+      </motion.h1>
 
-            {/* Main Heading */}
-            <h1
-  className="
-    text-8xl
-    font-black
-    uppercase
-    tracking-tighter
-    drop-shadow-2xl
-    animate-pop-color
-    will-change-transform
-  "
->
-  Make it pop!
-</h1>
+      {/* ================= DETECTED ================= */}
+      <div className="flex flex-col items-center mt-20">
+        <p className="text-[#F3E9D2] text-md">
+          Detected:
+          <span className="ml-2">
+            {reactionEmojis[previousReaction] || "❓"}{" "}
+            {reactionLabels[previousReaction] || previousReaction}
+          </span>
+        </p>
+      </div>
 
+      {/* ================= ACTIONS ================= */}
+      <div className="mt-8 flex flex-col items-center gap-4 w-full max-w-2xl">
+        <p
+          className="uppercase tracking-[0.2em] mb-2 text-sm"
+          style={{ color: "rgb(212, 181, 200)", opacity: 0.7 }}
+        >
+          Select Reaction
+        </p>
 
-            {/* Detected Reaction Info */}
-            <div className="flex flex-col items-center gap-2">
-                <div className="flex items-center gap-3 px-6 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-                    <span className="text-xs font-bold text-orange-200/50 uppercase tracking-[0.3em]">
-                        Detected:
-                    </span>
-                    {previousReaction && (
-                        <div className="flex items-center gap-2">
-                            <span className="text-xl">{reactionEmojis[previousReaction] || "❓"}</span>
-                            <span className="text-sm font-black text-orange-200 uppercase tracking-widest">
-                                {reactionLabels[previousReaction] || previousReaction}
-                            </span>
-                        </div>
-                    )}
-                </div>
-            </div>
+        <div className="flex flex-wrap justify-center gap-8">
+          {reactions.map((reaction) => {
+            const isSelected = selectedReaction === reaction.id;
 
-            {/* Interaction Area */}
-            <div className="flex flex-col items-center gap-8 mt-12 w-full max-w-2xl">
-                <h2 className="text-sm font-bold text-orange-200/40 uppercase tracking-[0.5em]">
-                    Select Reaction
-                </h2>
-
-                <div className="flex flex-wrap justify-center gap-8">
-                    {reactions.map((reaction) => {
-                        const isSelected = selectedReaction === reaction.id;
-
-                        return (
-                            <button
-                                key={reaction.id}
-                                onClick={() => onSelect(screenKey, reaction.id)}
-                                className={`
-                  group flex items-center gap-5 px-10 py-6 rounded-3xl border-2 transition-all duration-500
-                  ${isSelected
-                                        ? "bg-orange-300 border-orange-300 scale-110 shadow-[0_0_50px_rgba(253,186,116,0.5)]"
-                                        : "bg-[#3d243a]/60 backdrop-blur-md border-orange-200/10 hover:border-orange-200/40 hover:scale-105"
-                                    }
+            return (
+              <button
+                key={reaction.id}
+                onClick={() => onSelect(screenKey, reaction.id)}
+                className={`
+                  px-8.5 py-4.5
+                  mb-14
+                  backdrop-blur-sm
+                  border
+                  rounded-full
+                  transition-all
+                  uppercase
+                  tracking-wider
+                  flex items-center gap-2
+                  ${isSelected ? "scale-105" : ""}
                 `}
-                            >
-                                <span className="text-4xl transition-transform duration-300 group-hover:scale-125">
-                                    {reaction.icon}
-                                </span>
-                                <span
-                                    className={`
-                    font-black tracking-[0.2em] text-sm
-                    ${isSelected ? "text-[#3d243a]" : "text-white/90"}
-                  `}
-                                >
-                                    {reaction.label}
-                                </span>
-                            </button>
-                        );
-                    })}
-                </div>
-            </div>
+                style={{
+                  backgroundColor: "rgba(90, 38, 80, 0.8)",
+                  borderColor: isSelected
+                    ? "rgba(233, 168, 106, 0.6)"
+                    : "rgba(233, 168, 106, 0.3)",
+                  color: "rgb(255, 255, 255)",
+                }}
+              >
+                <span className="text-2xl">{reaction.icon}</span>
+                <span className="text-sm font-normal">
+                  {reaction.label}
+                </span>
+              </button>
+            );
+          })}
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default FifthPage;

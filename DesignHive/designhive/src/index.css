@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
+
 
 /* Custom theme extensions */
 @theme {
@@ -47,7 +49,18 @@
   /* Crash glow pulse */
   --animate-crash-pulse: crash-pulse 2.5s ease-in-out infinite;
 
+  --font-sans: "Hammersmith One",
+ui-sans-serif,
+system-ui,
+sans-serif,
+"Apple Color Emoji",
+"Segoe UI Emoji",
+"Segoe UI Symbol",
+"Noto Color Emoji";
+
+
   @keyframes crash-pulse {
+
 
     0%,
     100% {
@@ -101,82 +114,105 @@
 
   --animate-clock-wobble: clock-wobble 3s ease-in-out infinite;
 
-@keyframes clock-wobble {
-  /* TOP — neutral */
-  0% {
-    transform: translateY(0) rotate(0deg);
+  @keyframes clock-wobble {
+
+    /* TOP — neutral */
+    0% {
+      transform: translateY(0) rotate(0deg);
+    }
+
+    /* DESCENDING — tilting RIGHT */
+    30% {
+      transform: translateY(6px) rotate(8deg);
+    }
+
+    /* BOTTOM — now tilted LEFT */
+    50% {
+      transform: translateY(14px) rotate(-10deg);
+    }
+
+    /* ASCENDING — reducing LEFT tilt */
+    75% {
+      transform: translateY(6px) rotate(-4deg);
+    }
+
+    /* BACK TO TOP — neutral */
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
   }
 
-  /* DESCENDING — tilting RIGHT */
-  30% {
-    transform: translateY(6px) rotate(8deg);
+
+  @keyframes sparkle {
+    0% {
+      transform: scale(1) rotate(0deg);
+      opacity: 0.6;
+    }
+
+    10% {
+      transform: scale(1.01) rotate(0.6deg);
+      opacity: 1;
+    }
+
+    20% {
+      transform: scale(0.99) rotate(-0.6deg);
+      opacity: 0.6;
+    }
+
+    30% {
+      transform: scale(1.01) rotate(0.6deg);
+      opacity: 1;
+    }
+
+    40% {
+      transform: scale(0.99) rotate(-0.6deg);
+      opacity: 0.6;
+    }
+
+    50% {
+      transform: scale(1.01) rotate(0.6deg);
+      opacity: 1;
+    }
+
+    60% {
+      transform: scale(0.99) rotate(-0.6deg);
+      opacity: 0.6;
+    }
+
+    70% {
+      transform: scale(1.01) rotate(0.6deg);
+      opacity: 1;
+    }
+
+    80% {
+      transform: scale(0.99) rotate(-0.6deg);
+      opacity: 0.6;
+    }
+
+    90% {
+      transform: scale(1.01) rotate(0.6deg);
+      opacity: 1;
+    }
+
+    100% {
+      transform: scale(1) rotate(0deg);
+      opacity: 0.6;
+    }
   }
 
-  /* BOTTOM — now tilted LEFT */
-  50% {
-    transform: translateY(14px) rotate(-10deg);
-  }
 
-  /* ASCENDING — reducing LEFT tilt */
-  75% {
-    transform: translateY(6px) rotate(-4deg);
-  }
 
-  /* BACK TO TOP — neutral */
-  100% {
-    transform: translateY(0) rotate(0deg);
+
+
+  /* ANIMATING PROGRESS BAR IN EMOTION DATA CARD */
+@keyframes grow-bar {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
   }
 }
-
-
-@keyframes sparkle {
-  0% {
-    transform: scale(1) rotate(0deg);
-    opacity: 0.6;
-  }
-
-  10% {
-    transform: scale(1.01) rotate(0.6deg);
-    opacity: 1;
-  }
-  20% {
-    transform: scale(0.99) rotate(-0.6deg);
-    opacity: 0.6;
-  }
-  30% {
-    transform: scale(1.01) rotate(0.6deg);
-    opacity: 1;
-  }
-  40% {
-    transform: scale(0.99) rotate(-0.6deg);
-    opacity: 0.6;
-  }
-  50% {
-    transform: scale(1.01) rotate(0.6deg);
-    opacity: 1;
-  }
-  60% {
-    transform: scale(0.99) rotate(-0.6deg);
-    opacity: 0.6;
-  }
-  70% {
-    transform: scale(1.01) rotate(0.6deg);
-    opacity: 1;
-  }
-  80% {
-    transform: scale(0.99) rotate(-0.6deg);
-    opacity: 0.6;
-  }
-  90% {
-    transform: scale(1.01) rotate(0.6deg);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 0.6;
-  }
-}
-
 
 
 }
@@ -184,6 +220,7 @@
 html,
 body,
 #root {
+  font-family: var(--font-sans);
   height: 100%;
   margin: 0;
   padding: 0;
