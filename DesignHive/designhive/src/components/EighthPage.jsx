@@ -1,7 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const EighthPage = ({ onSelect, selectedReaction }) => {
+const EighthPage = ({ screenKey,
+  onSelect,
+  selectedReaction,
+  previousReaction, }) => {
     const scenarioCards = [
         { id: 1, text: "FIX A TYPO OR REDESIGN?" },
         { id: 2, text: "WHEN PIXELS MISALIGN...?" },
@@ -96,13 +99,14 @@ const EighthPage = ({ onSelect, selectedReaction }) => {
             {/* Complete Analysis Button - Lifted, Pill-shaped, Smaller */}
             {/* Reduced margin-top (mt-12 -> mt-6) to lift it up */}
             <div className="mt-6">
-                <button className="bg-orange-300 hover:bg-orange-400 text-[#3d243a] font-black 
-                py-3 px-8 /* Smaller padding */
-                rounded-full /* Pill shape */
-                text-sm /* Smaller text size */
-                uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-lg">
-                    Complete Analysis
-                </button>
+                <button
+  className="px-8 py-4 rounded-xl uppercase tracking-wider text-sm transition-transform hover:scale-105"
+  style={{ backgroundColor: "rgb(233,168,106)", color: "rgb(74,31,62)" }}
+>
+  Complete Analysis
+</button>
+
+
             </div>
         </div>
     );

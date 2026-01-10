@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
 import BackgroundLayout from "./components/BackgroundLayout";
 import ProgressBar from "./components/ProgressBar";
+import EmotionDataCard from "./components/EmotionDataCard";
+
 import WelcomeScreen from "./components/screens/WelcomeScreen";
 import SecondPage from "./components/SecondPage";
 import ThirdPage from "./components/ThirdPage";
@@ -9,7 +13,6 @@ import FifthPage from "./components/FifthPage";
 import SixthPage from "./components/SixthPage";
 import SeventhPage from "./components/SeventhPage";
 import EighthPage from "./components/EighthPage";
-import EmotionDataCard from "./components/EmotionDataCard";
 import AnalysisPage from "./components/AnalysisPage";
 
 const App = () => {
@@ -19,28 +22,28 @@ const App = () => {
 
   const handleNext = () => {
     if (currentStep < screens.length - 1) {
-      setCurrentStep(prev => prev + 1);
+      setCurrentStep((prev) => prev + 1);
     }
   };
 
   const handlePrev = () => {
     if (currentStep > 0) {
-      setCurrentStep(prev => prev - 1);
+      setCurrentStep((prev) => prev - 1);
     }
   };
 
   const handleReactionSelect = (screenKey, choice) => {
-    setReactions(prev => ({
+    setReactions((prev) => ({
       ...prev,
-      [screenKey]: choice
+      [screenKey]: choice,
     }));
     handleNext();
   };
 
   useEffect(() => {
-    console.log(reactions);
-    console.log(currentStep);
-  }, [reactions])
+    console.log("Reactions:", reactions);
+    console.log("Step:", currentStep);
+  }, [reactions, currentStep]);
 
   const screens = [
     <WelcomeScreen key="welcome" />,
@@ -84,26 +87,59 @@ const App = () => {
       selectedReaction={reactions.seventh}
       previousReaction={reactions.sixth}
     />,
+
     <EighthPage
       key="eighth"
+      screenKey="eighth"
       onSelect={handleReactionSelect}
       selectedReaction={reactions.eighth}
     />,
-    <AnalysisPage
-      key="analysis"
-      reactions={reactions}
-    />
+
+    <AnalysisPage key="analysis" reactions={reactions} />,
   ];
 
   return (
     <BackgroundLayout>
-      {/* Emotion Data Card - Visible from Step 4 onwards */}
+      {/* Emotion summary card appears from step 4 onward */}
       {currentStep >= 3 && <EmotionDataCard reactions={reactions} />}
 
-      <div className="flex-1 w-full flex items-center justify-center">
-        {screens[currentStep]}
+      {/* SCREEN TRANSITION AREA */}
+      <div className="flex-1 w-full flex items-center justify-center relative overflow-hidden">
+        <AnimatePresence mode="wait">
+          {/* <motion.div
+            key={currentStep}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35, ease: "easeInOut", delay: 1 }}
+            className="w-full h-full flex items-center justify-center"
+          >
+            {screens[currentStep]}
+          </motion.div> */}
+          
+          {/* It happens to be the case that motion div applies delay to both entry and exit */}
+          
+          <motion.div
+            key={currentStep}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{
+              opacity: 0,
+              transition: {
+                duration: 0.35,
+                delay: 1,
+                ease: "easeInOut",
+              },
+            }}
+            transition={{ duration: 0.35, ease: "easeInOut"}}
+            className="w-full h-full flex items-center justify-center"
+          >
+            {screens[currentStep]}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
+      {/* PROGRESS BAR */}
       <footer className="absolute bottom-12 w-full flex justify-center px-6">
         <ProgressBar
           currentStep={currentStep}

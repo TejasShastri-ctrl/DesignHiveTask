@@ -64,18 +64,12 @@ const AnalysisPage = ({ reactions = {} }) => {
             </div>
 
             {/* Bottom-aligned UI Stack */}
-            <div className="z-10 w-full mt-70 max-w-[40%] flex flex-col items-center gap-8 mb-12">
+            <div className="z-10 w-full max-w-[600px] flex flex-col items-center gap-8 mb-12">
+
                 
                 {/* Status Texts */}
                 <div className="text-center space-y-6">
-                    <motion.h1
-                        className="text-4xl font-black uppercase tracking-[0.3em] drop-shadow-md"
-                        style={{ color: "white", opacity: 0.6 }}
-                        animate={{ opacity: [0.7, 1, 0.7] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                    >
-                        ANALYZING
-                    </motion.h1>
+                    <h2 className="text-[#F4D8B8] mb-2 uppercase tracking-tight text-4xl text-[40px]">Analyzing</h2>
 
                     <div className="flex flex-col items-center gap-2 space-y-3">
                         <div className={`px-4 py-1.5 rounded-full mt-8 border border-yellow-400 border-[1px] bg-[#3d243a]/60 backdrop-blur-sm`}>
