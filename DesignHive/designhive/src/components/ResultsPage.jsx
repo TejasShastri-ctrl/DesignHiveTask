@@ -1,5 +1,7 @@
-import { ICON_MAP } from "./IconRegistry";
+import { motion } from "framer-motion";
+import { ICON_MAP } from "./registry/IconRegistry";
 import HexagonOutline from "./HexIcon";
+import { popItem } from "../motion/animations";
 
 const ResultsPage = ({ iconKey = "idea" }) => {
   const downloadPNG = () => {
@@ -7,7 +9,7 @@ const ResultsPage = ({ iconKey = "idea" }) => {
     if (!svgUrl) return;
 
     const img = new Image();
-    img.crossOrigin = "anonymous"; // important for canvas export
+    img.crossOrigin = "anonymous";
 
     img.onload = () => {
       const size = 512;
@@ -36,20 +38,40 @@ const ResultsPage = ({ iconKey = "idea" }) => {
 
   return (
     <div className="flex flex-col items-center justify-center gap-8">
-      <HexagonOutline iconKey={iconKey} />
+      <motion.div
+        variants={popItem}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.3 }}
+      >
+        <HexagonOutline iconKey={iconKey} />
+      </motion.div>
 
-      <div className="text-center mt-10 max-w-2xl">
+      <motion.div
+        variants={popItem}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.45 }}
+        className="text-center mt-10 max-w-2xl"
+      >
         <h2 className="text-[#FFB347] mb-4">You are the Flow Thinker!</h2>
         <p className="text-[#F3E9D2] text-xl">Systems thinking</p>
-      </div>
+      </motion.div>
 
-      <button
+      <motion.button
+        variants={popItem}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.6 }}
         onClick={downloadPNG}
         className="px-8 py-4 mb-10 rounded-xl uppercase tracking-wider text-sm transition-transform hover:scale-105"
-        style={{ backgroundColor: "rgb(233, 168, 106)", color: "rgb(74, 31, 62)" }}
+        style={{
+          backgroundColor: "rgb(233, 168, 106)",
+          color: "rgb(74, 31, 62)",
+        }}
       >
         Download Result
-      </button>
+      </motion.button>
     </div>
   );
 };

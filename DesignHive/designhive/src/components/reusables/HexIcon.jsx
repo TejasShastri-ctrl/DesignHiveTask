@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ICON_MAP } from "./IconRegistry";
+import { ICON_MAP } from "../registry/IconRegistry";
 
 const HexagonOutline = ({
   iconKey,

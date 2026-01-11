@@ -1,4 +1,4 @@
-import hexback from '../assets/hexback.png';
+import hexback from '../../assets/hexback.png';
 
 const BackgroundLayout = ({ children }) => {
   const THEME_YELLOW = "#c4a000";
@@ -22,7 +22,6 @@ const BackgroundLayout = ({ children }) => {
         }}
       />
 
-      {/* Single Layer PNG Hexagonal Mesh - RECOLORED VIA MASKING */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.08]"
         style={{
@@ -32,7 +31,6 @@ const BackgroundLayout = ({ children }) => {
           maskPosition: 'center',
           maskSize: 'cover',
 
-          // Webkit prefix for Safari/Chrome compatibility
           WebkitMaskImage: `url(${hexback})`,
           WebkitMaskRepeat: 'no-repeat',
           WebkitMaskPosition: 'center',

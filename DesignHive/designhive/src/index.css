@@ -3,9 +3,28 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800&display=swap");
 
 
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(74, 31, 62, 0.3);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(233, 168, 106, 0.4);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(233, 168, 106, 0.7);
+}
+
+
 /* Custom theme extensions */
 @theme {
-  /* Floating (already present, refined) */
+  /* Float animation */
   --animate-float: float 6s ease-in-out infinite;
 
   @keyframes float {
@@ -51,13 +70,13 @@
   --animate-crash-pulse: crash-pulse 2.5s ease-in-out infinite;
 
   --font-sans: "Hammersmith One",
-ui-sans-serif,
-system-ui,
-sans-serif,
-"Apple Color Emoji",
-"Segoe UI Emoji",
-"Segoe UI Symbol",
-"Noto Color Emoji";
+  ui-sans-serif,
+  system-ui,
+  sans-serif,
+  "Apple Color Emoji",
+  "Segoe UI Emoji",
+  "Segoe UI Symbol",
+  "Noto Color Emoji";
 
 
   @keyframes crash-pulse {
@@ -116,28 +135,18 @@ sans-serif,
   --animate-clock-wobble: clock-wobble 3s ease-in-out infinite;
 
   @keyframes clock-wobble {
-
-    /* TOP — neutral */
     0% {
       transform: translateY(0) rotate(0deg);
     }
-
-    /* DESCENDING — tilting RIGHT */
     30% {
       transform: translateY(6px) rotate(8deg);
     }
-
-    /* BOTTOM — now tilted LEFT */
     50% {
       transform: translateY(14px) rotate(-10deg);
     }
-
-    /* ASCENDING — reducing LEFT tilt */
     75% {
       transform: translateY(6px) rotate(-4deg);
     }
-
-    /* BACK TO TOP — neutral */
     100% {
       transform: translateY(0) rotate(0deg);
     }
@@ -205,15 +214,16 @@ sans-serif,
 
 
 
-  /* ANIMATING PROGRESS BAR IN EMOTION DATA CARD */
-@keyframes grow-bar {
-  from {
-    width: 0;
+  /* PROGRESS BAR IN EMOTION DATA CARD */
+  @keyframes grow-bar {
+    from {
+      width: 0;
+    }
+
+    to {
+      width: 100%;
+    }
   }
-  to {
-    width: 100%;
-  }
-}
 
 
 }

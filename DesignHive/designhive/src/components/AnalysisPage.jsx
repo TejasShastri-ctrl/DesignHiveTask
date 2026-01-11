@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { popDelayed } from "../motion/animations";
 
 const AnalysisPage = ({ reactions = {}, onComplete }) => {
     const [progress, setProgress] = useState(0);
@@ -76,11 +77,13 @@ const AnalysisPage = ({ reactions = {}, onComplete }) => {
                     <h2 className="text-[#F4D8B8] mb-2 uppercase tracking-tight text-4xl text-[40px]">Analyzing</h2>
 
                     <div className="flex flex-col items-center gap-2 space-y-3">
-                        <div className={`px-4 py-1.5 rounded-full mt-8 border border-yellow-400 border-[1px] bg-[#3d243a]/60 backdrop-blur-sm animate-pulse duration-500`}>
+                        <motion.div variants={popDelayed} whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.96 }} 
+                            initial="hidden" animate="show"
+                        className={`px-4 py-1.5 rounded-full mt-8 border border-yellow-400 border-[1px] bg-[#3d243a]/60 backdrop-blur-sm animate-pulse duration-500`}>
                             <span className="font-bold tracking-[0.2em] text-[10px] uppercase text-white opacity-60">
                                 PROCESSING DNA
                             </span>
-                        </div>
+                        </motion.div>
                         <span className="text-white/70 font-medium tracking-[0.2em] text-[11px] uppercase">
                             {dataPointsCount} DATA POINTS DETECTED
                         </span>
