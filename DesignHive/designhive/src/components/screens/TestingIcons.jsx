@@ -1,4 +1,4 @@
-import HexagonOutline from "../HexIcon";
+import HexagonOutline from "../reusables/HexIcon"
 import { Sparkles } from "lucide-react";
 
 const TestingIcons = () => {

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ICON_MAP } from "./registry/IconRegistry";
-import HexagonOutline from "./HexIcon";
+import HexagonOutline from "./reusables/HexIcon"
 import { popItem } from "../motion/animations";
 
 const ResultsPage = ({ iconKey = "idea" }) => {

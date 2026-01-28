@@ -1,4 +1,4 @@
-import HexagonOutline from "./HexIcon";
+import HexagonOutline from "./reusables/HexIcon"
 import { ICON_MAP } from "./registry/IconRegistry";
 
 const PostResult = ({ iconKey, onReset }) => {
